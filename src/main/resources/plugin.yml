@@ -1,5 +1,8 @@
 name: MiniGameSA
 author: Ayust, Bershall, Draskeer, Girdot, Deoko
-main: main.java.fr.ayust.Mai
+main: main.java.fr.ayust.Main
 version: '1.0'
 description: Projet YDAYS de semestre A
+commands:
+  death:
+    description: ouvre inventaire mode de jeu
