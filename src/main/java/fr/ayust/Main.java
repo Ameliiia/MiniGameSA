@@ -8,7 +8,7 @@ public class Main extends JavaPlugin {
     public void onEnable(){
 
         getLogger().info("[MiniGameSA] has been enable");
-
+        getLogger().info("eqzdqzdqzd");
     }
 
     @Override
