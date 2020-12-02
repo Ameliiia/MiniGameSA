@@ -9,12 +9,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class PlayerGUIListener implements Listener {
@@ -29,13 +31,21 @@ public class PlayerGUIListener implements Listener {
 
 
         if(is.getType().equals(Material.SKELETON_SKULL) && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().equalsIgnoreCase("Mini-GAME WIP")) {
+            final ItemStack rule= new ItemStack(Material.WRITTEN_BOOK);
+            final BookMeta ruleBook = (BookMeta) rule.getItemMeta();
+            ruleBook.setTitle("§dRègle du jeu");
+            ruleBook.setAuthor("§aAyust §r, §6Bershall §r, §cDraskeer §r, §1Girdot");
+            ruleBook.setLore(Arrays.asList("§eCeci sont les régles du jeu! ehe te nandayo"));
+            ruleBook.setDisplayName("§dRègle du jeu");
+            ruleBook.setPages("§2Salut à toi :D.§r\nEs-tu malchanceux ou chanceux.\n\n1", "Test");
+            rule.setItemMeta(ruleBook);
+
             p.teleport(new Location(Bukkit.getWorld("world"), 82, 121, -87 )); // TODO: Arena Manager or Lobby Manager
             p.setGameMode(GameMode.ADVENTURE);
             p.getInventory().clear();
-
             p.setHealth(20.0);
             p.setFoodLevel(20);
-
+            p.getInventory().addItem(rule);
             new AnnounceConnectionRunnable(p).runTaskTimer(Main.getInstance(), 0L, 20L);
 
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable(){
@@ -51,6 +61,9 @@ public class PlayerGUIListener implements Listener {
 
                     p.sendMessage("§3Votre partie va bientôt commencer :D");
                     p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+                    p.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
+                    p.removePotionEffect(PotionEffectType.WATER_BREATHING);
+                    p.removePotionEffect(PotionEffectType.REGENERATION);
                     p.setGameMode(GameMode.SURVIVAL);
                     p.teleport(new Location(Bukkit.getWorld("world"),22.115, 64, -245));
                     p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100000,1, false, false, false));
@@ -104,6 +117,8 @@ public class PlayerGUIListener implements Listener {
         assert  im != null;
 
         final InventoryView iv = e.getView();
+
+
 
         if(iv.getTitle().contains("§3Mode")) {
             e.setCancelled(true);
