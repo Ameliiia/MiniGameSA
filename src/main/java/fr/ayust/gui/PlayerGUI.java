@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
@@ -24,6 +25,16 @@ public class PlayerGUI {
         deathItem.setLore(Arrays.asList("§6Meurs le plus vite :D"));
         death.setItemMeta(deathItem);
 
+        final ItemStack rule= new ItemStack(Material.WRITTEN_BOOK);
+        final BookMeta ruleBook = (BookMeta) rule.getItemMeta();
+        ruleBook.setTitle("§dRègle du jeu");
+        ruleBook.setAuthor("§aAyust §r, §6Bershall §r, §cDraskeer §r, §1Girdot");
+        ruleBook.setLore(Arrays.asList("§eCeci sont les régles du jeu! ehe te nandayo"));
+        ruleBook.setDisplayName("§dRègle du jeu");
+        ruleBook.setPages("§2Salut à toi :D.§r\nEs-tu malchanceux ou chanceux.\n\n1", "Test");
+        rule.setItemMeta(ruleBook);
+
+
         for (int i = 0; i < 9; i++) {
             inv.setItem(i, glass);
         }
@@ -34,6 +45,7 @@ public class PlayerGUI {
         inv.setItem(35, glass);
 
         inv.setItem(22, death);
+        inv.setItem(31, rule);
 
         inv.setItem(9, glass);
         inv.setItem(18, glass);
